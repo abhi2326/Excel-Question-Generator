@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<style>
+
+body{
+font-family:Arial;
+padding:40px;
+background:#f4f6f8;
+}
+
+.container{
+background:white;
+padding:30px;
+border-radius:10px;
+width:400px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+button{
+background:#4285f4;
+color:white;
+padding:10px 20px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Excel Question Generator</h2>
+
+<label>Enter Excel Topics (comma separated)</label>
+
+<input id="topics" style="width:100%">
+
+<br><br>
+
+<label>Questions per Topic</label>
+
+<input id="count" type="number" value="5">
+
+<br><br>
+
+<button onclick="generate()">Generate Sheet</button>
+
+<p id="result"></p>
+
+</div>
+
+
+<script>
+
+function generate(){
+
+var topics = document.getElementById("topics").value;
+var count = document.getElementById("count").value;
+
+document.getElementById("result").innerHTML="Generating...";
+
+google.script.run.withSuccessHandler(function(url){
+
+document.getElementById("result").innerHTML =
+"Sheet Created: <a href='"+url+"' target='_blank'>Open Sheet</a>";
+
+}).generateSheet(topics,count);
+
+}
+
+</script>
+
+</body>
+
+</html>
